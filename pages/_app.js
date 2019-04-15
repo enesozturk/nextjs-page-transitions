@@ -1,7 +1,11 @@
 import App, { Container } from 'next/app';
 import React from 'react';
 import { Transition, animated } from 'react-spring';
-import NavBar from '../components/Navbar';
+
+import { NavBar } from '../components/Navbar';
+import { NavBarItems } from '../props/NavBarConfig';
+
+import 'gestalt/dist/gestalt.css';
 
 export default class NextApp extends App {
 	static async getInitialProps({ Component, router, ctx }) {
@@ -15,7 +19,7 @@ export default class NextApp extends App {
 	}
 
 	render() {
-		const items = [
+		const transitionItems = [
 			{
 				id: this.props.router.route,
 				Component: this.props.Component,
@@ -24,14 +28,14 @@ export default class NextApp extends App {
 		];
 		return (
 			<Container>
-				<NavBar />
+				<NavBar items={NavBarItems} />
 				<Transition
-					items={items}
-					keys={(items) => items.Component}
+					items={transitionItems}
+					keys={(items) => transitionItems.Component}
 					from={{ opacity: 0 }}
 					enter={{ opacity: 1 }}
 					leave={{ opacity: 0 }}
-					config={{ duration: 200 }}
+					config={{ duration: 300 }}
 				>
 					{({ Component, pageProps }) => (styles) => (
 						<animated.div style={styles}>

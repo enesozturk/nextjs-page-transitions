@@ -10,6 +10,8 @@
 		"export": "next export"
 	},
 	"dependencies": {
+		"@zeit/next-css": "^1.0.1",
+		"gestalt": "^0.95.0",
 		"holderjs": "^2.9.6",
 		"next": "^8.0.4",
 		"react": "^16.8.6",

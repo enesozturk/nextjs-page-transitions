@@ -1,21 +1,31 @@
-import React from 'react';
-import { Container, Row, Nav } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import Router from 'next/router';
 
-export default class NavBar extends React.PureComponent {
-	render() {
-		return (
-			<Container>
-				<Row>
-					<Nav>
-						<Nav.Item>
-							<Nav.Link href="/">Home</Nav.Link>
-						</Nav.Item>
-						<Nav.Item>
-							<Nav.Link href="/about">About</Nav.Link>
-						</Nav.Item>
-					</Nav>
-				</Row>
-			</Container>
-		);
-	}
-}
+import { Container, Row } from 'react-bootstrap';
+import { Tabs } from 'gestalt';
+
+export const NavBar = ({ items }) => {
+	const [ activeIndex, setActiveIndex ] = useState(-1);
+	useEffect(
+		() => {
+			const handleRouteChange = (url) => {
+				const newActiveIndex = items.findIndex((item) => item.href === url);
+				setActiveIndex(newActiveIndex);
+			};
+
+			Router.events.on('routeChangeComplete', handleRouteChange);
+			handleRouteChange(Router.route);
+
+			return () => Router.events.off('routeChangeComplete', handleRouteChange);
+		},
+		[ items ]
+	);
+
+	return (
+		<Container style={{ boxSizing: 'border-box', padding: '.5em 0' }}>
+			<Row>
+				<Tabs tabs={items} activeTabIndex={activeIndex} onChange={() => {}} />
+			</Row>
+		</Container>
+	);
+};
