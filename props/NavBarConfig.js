@@ -1,14 +1,14 @@
 export const NavBarItems = [
 	{
-		text: 'Home',
+		title: 'Home',
 		href: '/'
 	},
 	{
-		text: 'About',
+		title: 'About',
 		href: '/about'
 	},
 	{
-		text: 'Contact',
+		title: 'Contact',
 		href: '/contact'
 	}
 ];

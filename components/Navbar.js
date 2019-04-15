@@ -1,30 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import Router from 'next/router';
+import React from 'react';
+import Link from 'next/link';
 
-import { Container, Row } from 'react-bootstrap';
-import { Tabs } from 'gestalt';
+import { Container, Row, Col, Nav } from 'react-bootstrap';
 
 export const NavBar = ({ items }) => {
-	const [ activeIndex, setActiveIndex ] = useState(-1);
-	useEffect(
-		() => {
-			const handleRouteChange = (url) => {
-				const newActiveIndex = items.findIndex((item) => item.href === url);
-				setActiveIndex(newActiveIndex);
-			};
-
-			Router.events.on('routeChangeComplete', handleRouteChange);
-			handleRouteChange(Router.route);
-
-			return () => Router.events.off('routeChangeComplete', handleRouteChange);
-		},
-		[ items ]
-	);
-
 	return (
-		<Container style={{ boxSizing: 'border-box', padding: '.5em 0' }}>
+		<Container>
 			<Row>
-				<Tabs tabs={items} activeTabIndex={activeIndex} onChange={() => {}} />
+				<Nav variant="pills">
+					{items.map((item, index) => (
+						<Nav.Item>
+							<Link key={index} href={item.href}>
+								<a className="nav-link">{item.title}</a>
+							</Link>
+						</Nav.Item>
+					))}
+				</Nav>
 			</Row>
 		</Container>
 	);
