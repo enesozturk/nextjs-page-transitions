@@ -1,0 +1,17 @@
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.navbar div {
+  margin-left: 1em;
+}
+
+.navbar div a {
+  text-decoration: none;
+}
+
+.container {
+  position: absolute;
+  margin-top: 2em;
+}
